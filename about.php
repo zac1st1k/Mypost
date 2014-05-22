@@ -16,10 +16,10 @@
   <h1>REPORT</h1>
    	<ul>
 		<li>No. I have completed all the tasks.</li>
-		<li>Not applicable.</li>
+		<li>Statuswall navigation with page number.</li>
 		<li>Remove a single post in statuswall.php.</li>
-		<li>Better layout and style.</li>
-		<li>date_default_timezone_set("Australia/Sydney"); is used to make sure that posting date format matches the mystatus table date field</li>
+		<li>Better layout and style. Individual post remove.</li>
+		<li>Comment module</li>
 	</ul>
  	<ul>
 		<li><a href="statuswall.php">Status Wall</a></li>

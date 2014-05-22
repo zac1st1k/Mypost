@@ -34,26 +34,29 @@
 		if (!$dbConnect)
 		  die("<p>The database server is not available.</p>"); 
 		$dbSelect = @mysqli_select_db($dbConnect, "s_7493975_db");
-	
 		$email = $_POST["email"];
 		$psw = $_POST["psw"];
 		$result = mysqli_query($dbConnect, "SELECT password FROM users WHERE user_email ='$email'") 
 			or die("<p>Unable to execute the query.</p>" 
 			. "<p>Error code " . mysqli_errno($dbConnect) 
 			. ": " . mysqli_error($dbConnect) . "</p>");
-		$row = mysqli_fetch_row($result);
-		if ($psw === $row[0]){
-		//set session redirect to statuswll.php
-		  $result_name = mysqli_query($dbConnect, "SELECT profile_name FROM users WHERE user_email = '$email'") 
-			or die("<p>Unable to execute the query.</p>" 
-			. "<p>Error code " . mysqli_errno($dbConnect) 
-			. ": " . mysqli_error($dbConnect) . "</p>");
-			$row_name = mysqli_fetch_row($result_name);	
-  			$_SESSION['name'] = $row_name[0];
-  			header('Location: statuswall.php');
+		if($result->num_rows == 1 ){
+			$row = mysqli_fetch_row($result);
+			if ($psw === $row[0]){
+			//set session redirect to statuswll.php
+			  $result_name = mysqli_query($dbConnect, "SELECT profile_name FROM users WHERE user_email = '$email'") 
+				or die("<p>Unable to execute the query.</p>" 
+				. "<p>Error code " . mysqli_errno($dbConnect) 
+				. ": " . mysqli_error($dbConnect) . "</p>");
+				$row_name = mysqli_fetch_row($result_name);	
+				$_SESSION['name'] = $row_name[0];
+				header('Location: statuswall.php');
+			}
+			else
+				echo "Password is invalid.<br />";
 		}
 		else
-		  echo "Password is invalid.<br />";
+			echo "Email is not exsited";
 	}
  	?>
  	<br />
